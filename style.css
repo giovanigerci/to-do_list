@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+body {
+  font-family: 'Inter', sans-serif; /* Fonte para textos */
+  background: #f4f4f4;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 350px;
+    text-align: center;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif; /* Fonte para títulos */
+  margin-bottom: 20px;
+}
+
+.input-area{
+    display: flex;
+    gap: 10px;
+}
+
+input{
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+#addTaskBtn{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1f9225ff;
+    color: #FFF;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.24);
+}
+#addTaskBtn:hover{
+    background: rgb(29, 134, 34);
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+li.completed span{
+    text-decoration: line-through;
+    color: gray;
+    
+}
+
+.remove-btn{
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 0.9em;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.remove-btn:hover{
+    font-size: 1em;
+    transition-duration: 0.2s;
+}
+
