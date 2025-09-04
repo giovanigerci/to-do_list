@@ -10,18 +10,14 @@
 </head>
 <body>
   <header>
-    <h1>LIST's</h1>
+    <h1>LISTs</h1>
     <button id="newList">+ Nova Lista</button>
   </header>
 
   <main>
     <aside>
       <h2>Minhas Listas</h2>
-      <ul class="allList">
-        <li>Lista 1</li>
-        <li>Lista 2</li>
-        <li>Lista 3</li>
-      </ul>
+      <ul id="allList"></ul>
     </aside>
 
     <section>
@@ -32,19 +28,25 @@
 
       <div id="newListLayout" class="panel hidden">
         <h2>📝 Lista de Tarefas</h2>
-
         <div class="input-area">
           <input type="text" id="taskInput" placeholder="Digite uma tarefa...">
           <button id="addTaskBtn">Adicionar</button>
         </div>
 
         <ul id="taskList"></ul>
-        <button id="addListBtn">Finalizar Lista</button>
+
+        <div class="buttons">
+          <button id="addListBtn">Finalizar Lista</button>
+          <button id="deleteListBtn" class="hidden">Excluir Lista</button>
+        </div>
       </div>
     </section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
+  <script type="module" src="addList.js"></script>
+  <script type="module" src="storage.js"></script>
+
 </body>
 </html>

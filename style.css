@@ -1,76 +1,161 @@
+:root {
+  --primary-color: #2c3e50;    
+  --secondary-color: #5ca589;  
+  --accent-color: #e74c3c;    
+  --background-light: #ecf0f1; 
+  --background-dark: #bdc3c7; 
+  --text-dark: #2c3e50;
+  --text-light: #ffffff;
+}
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  color: var(--text-dark);
+  background-color: var(--background-light);
+  height: 92vh;
 }
 
 header {
+  height: 5vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background: #114700;
-  border-bottom: 1px solid #ddd;
+  padding: 15px 30px;
+  background-color: var(--primary-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
-  color: white;
-  margin: 10px;
-  border-bottom: solid gray;
+  color: var(--text-light);
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
 }
 
 header button {
-  padding: 8px 15px;
-  background: #000000;
-  color: white;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: var(--text-light);
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+header button:hover {
+  background-color: #396655;
+  border: 1px solid black;  
 }
 
 main {
   display: flex;
-  flex: 1;
+  gap: 20px;
+  height: 100%;
 }
 
 aside {
-  width: 300px;
-  border-right: 1px solid #ddd;
-  padding: 15px;
-  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  width: 400px;
+  padding: 20px;
+  background: var(--text-light);
+}
+
+aside h2 {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+  margin: 0 0 20px 0;
+}
+
+aside ul {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  justify-content: center;
+}
+
+li {
+  user-select: none;
+  cursor: pointer;
+}
+
+#allList li {
+  padding: 12px 15px;
+  background-color: var(--background-light);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+#allList li:hover {
+  background-color: var(--background-dark);
 }
 
 section {
+  width: 80%;
   flex: 1;
-  padding: 40px;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+}
+
+section ul{
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .panel {
-  background-color: #f9f9f9;
-  padding: 20px;
+  background-color: var(--text-light);
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  max-width: 500px;
-  width: 100%;
-  display: grid;
-  grid-auto-rows: max-content;
-  row-gap: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  margin: auto;
+  width: 80%;
+}
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid var(--background-dark);
+  border-radius: 8px;
+}
+
+#addTaskBtn {
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#addTaskBtn:hover {
+  background-color: #2980b9;
+  border: 1px solid black;
 }
 
 .hidden {
   display: none !important;
 }
 
-.panel h2 {
+h2 {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 10px;
 }
+
+p {
+  text-align: center;
+}
+
 
 .input-area {
   display: flex;
@@ -95,57 +180,63 @@ section {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.24);
 }
 
-#addTaskBtn:hover {
-  background: rgb(29, 134, 34);
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
 }
 
-#addListBtn{
-    display: block;
-    margin: 0 auto 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 12px;
-    background-color: #008156;
-    color: #FFF;
-    cursor: pointer;
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.24);
-    font-size: 1.1em;
-    font-weight: bold;
+.buttons button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-light);
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 1em;
+  font-weight: bold;
+  transition: transform 0.2s ease-in-out;
 }
 
-
-ul {
-    margin: 0;
-  list-style: none;
-  padding: 0;;
+.buttons button:hover {
+  transform: translateY(-2px);
+  border: 1px solid black;
 }
 
-li {
+#addListBtn {
+  background-color: var(--secondary-color);
+}
+
+#deleteListBtn {
+  background-color: var(--accent-color);
+}
+
+#taskList li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f9f9f9;
-  padding: 10px;
+  background-color: var(--background-light);
+  padding: 12px;
   border-radius: 8px;
   margin-bottom: 10px;
-  cursor: pointer;
 }
 
 li.completed span {
   text-decoration: line-through;
-  color: gray;
+  color: #7f8c8d;
 }
 
 .remove-btn {
   background-color: transparent;
   border: none;
-  color: red;
-  font-size: 0.9em;
+  color: var(--accent-color);
+  font-size: 1.2em;
   font-weight: bolder;
   cursor: pointer;
 }
 
 .remove-btn:hover {
-  font-size: 1em;
-  transition-duration: 0.2s;
+  transform: scale(1.1);
 }
