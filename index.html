@@ -1,23 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List's</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <h1>📝 Lista de Tarefas</h1>
+  <header>
+    <h1>LIST's</h1>
+    <button id="newList">+ Nova Lista</button>
+  </header>
+
+  <main>
+    <aside>
+      <h2>Minhas Listas</h2>
+      <ul class="allList">
+        <li>Lista 1</li>
+        <li>Lista 2</li>
+        <li>Lista 3</li>
+      </ul>
+    </aside>
+
+    <section>
+      <div id="defaultLayout" class="panel">
+        <h2>Visualização da Lista</h2>
+        <p>Selecione ou crie uma lista para começar.</p>
+      </div>
+
+      <div id="newListLayout" class="panel hidden">
+        <h2>📝 Lista de Tarefas</h2>
+
         <div class="input-area">
-            <input type="text" id="taskInput" placeholder="Digite uma tarefa...">
-            <button id="addTaskBtn">Adicionar</button>
+          <input type="text" id="taskInput" placeholder="Digite uma tarefa...">
+          <button id="addTaskBtn">Adicionar</button>
         </div>
+
         <ul id="taskList"></ul>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="script.js"></script>
+        <button id="addListBtn">Finalizar Lista</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
 </body>
 </html>

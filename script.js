@@ -1,71 +1,84 @@
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
+const newList = document.getElementById("newList");
+const newListLayout = document.getElementById("newListLayout");
+const defaultLayout = document.getElementById("defaultLayout");
 
-//Função para adicionar tarefa
+// Alternar entre layouts sem usar display:flex direto
+newList.addEventListener("click", () => {
+  defaultLayout.classList.add("hidden");
+  newListLayout.classList.remove("hidden");
+});
+
+// Função para adicionar tarefa
 function addTask() {
-    const taskText = taskInput.value.trim();
-    if (taskText === "") return;
+  const taskText = taskInput.value.trim();
+  if (taskText === "") return;
 
-    const tarefas = taskList.querySelectorAll("li span");
-    for (let tarefa of tarefas) {
-        if (tarefa.textContent.localeCompare(taskText, "pt-BR", { sensitivity: "base" }) === 0) {
-            Swal.fire({
-                icon: "warning",
-                title: "Tarefa duplicada",
-                text: "Essa tarefa já existe na lista!",
-                confirmButtonText: "Ok"
-            });
-            taskInput.value = "";
-            return;
-        }
+  // Verificar duplicadas
+  const tarefas = taskList.querySelectorAll("li span");
+  for (let tarefa of tarefas) {
+    if (tarefa.textContent.localeCompare(taskText, "pt-BR", { sensitivity: "base" }) === 0) {
+      Swal.fire({
+        icon: "warning",
+        title: "Tarefa duplicada",
+        text: "Essa tarefa já existe na lista!",
+        confirmButtonText: "Ok"
+      });
+      taskInput.value = "";
+      return;
     }
+  }
 
-    const li = document.createElement("li");
+  // Criar elemento <li>
+  const li = document.createElement("li");
 
-    const span = document.createElement("span");
-    span.textContent = taskText;
+  const span = document.createElement("span");
+  span.textContent = taskText;
 
-    const removeBtn = document.createElement("button");
-    removeBtn.textContent = "X";
-    removeBtn.classList.add("remove-btn");
-    removeBtn.onclick = () => {
-        Swal.fire({
-            title: "Você tem certeza?",
-            text: "Essa tarefa será removida.",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#1f9225ff", 
-            cancelButtonColor: "#d33",      
-            confirmButtonText: "Sim, remover",
-            cancelButtonText: "Cancelar"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                li.remove();
-                Swal.fire("Removida!", "A tarefa foi excluída com sucesso.", "success");
-            }
-        });
-    };
-
-    span.onclick = () => li.classList.toggle("completed");
-
-    li.appendChild(span);
-    li.appendChild(removeBtn);
-    taskList.appendChild(li);
-
-    taskInput.value = "";
-
+  // Botão de remover
+  const removeBtn = document.createElement("button");
+  removeBtn.textContent = "X";
+  removeBtn.classList.add("remove-btn");
+  removeBtn.onclick = () => {
     Swal.fire({
-        icon: "success",
-        title: "Boa!",
-        text: "Tarefa adicionada com sucesso!"
+      title: "Você tem certeza?",
+      text: "Essa tarefa será removida.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#1f9225ff",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, remover",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        li.remove();
+        Swal.fire("Removida!", "A tarefa foi excluída com sucesso.", "success");
+      }
     });
+  };
+
+  // Concluir tarefa ao clicar no texto
+  span.onclick = () => li.classList.toggle("completed");
+
+  li.appendChild(span);
+  li.appendChild(removeBtn);
+  taskList.appendChild(li);
+
+  taskInput.value = "";
+
+  Swal.fire({
+    icon: "success",
+    title: "Boa!",
+    text: "Tarefa adicionada com sucesso!"
+  });
 }
 
-//Evento no Botão
+// Evento no botão
 addTaskBtn.addEventListener("click", addTask);
 
-//Evento Enter no input
+// Evento Enter no input
 taskInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") addTask()
+  if (e.key === "Enter") addTask();
 });
