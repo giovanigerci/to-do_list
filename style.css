@@ -66,10 +66,15 @@ section {
   display: none !important;
 }
 
-.panel h2 {
+h2 {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 10px;
+}
+
+aside h2{
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgb(36, 110, 2);
 }
 
 .input-area {
@@ -115,7 +120,7 @@ section {
 
 
 ul {
-    margin: 0;
+  margin: 0;
   list-style: none;
   padding: 0;;
 }
@@ -129,6 +134,10 @@ li {
   border-radius: 8px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+#allList li{
+  justify-content: center;
 }
 
 li.completed span {
