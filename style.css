@@ -12,7 +12,9 @@ body {
   font-family: 'Inter', sans-serif;
   color: var(--text-dark);
   background-color: var(--background-light);
-  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 header {
@@ -56,10 +58,11 @@ main {
 aside {
   display: flex;
   flex-direction: column;
-  min-width: 150px;
+  min-width: 80px;
   width: 400px;
   padding: 20px;
   background: var(--text-light);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.15);
 }
 
 aside h2 {
@@ -79,6 +82,9 @@ aside ul {
 li {
   user-select: none;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 #allList li {
@@ -104,6 +110,7 @@ section ul{
   padding: 0px;
   display: flex;
   flex-direction: column;
+  
 }
 
 .panel {
@@ -150,6 +157,8 @@ h2 {
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 p {
@@ -221,6 +230,14 @@ p {
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 10px;
+  gap: 10px;
+}
+
+#taskList li span{
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 li.completed span {
