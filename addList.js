@@ -1,4 +1,4 @@
-import { showList } from "./script.js";
+import { showList, toggleDeleteButtonVisibility, currentList } from "./script.js";
 import { loadLists, saveLists } from "./storage.js";
 
 const allList = document.getElementById("allList");
@@ -21,6 +21,7 @@ function renderLists() {
             defaultLayout.classList.add("hidden");
             newListLayout.classList.remove("hidden");
             document.querySelector("#newListLayout h2").textContent = `📝 ${listName}`;
+            toggleDeleteButtonVisibility(true);
         });
         allList.appendChild(li);
     });
@@ -36,7 +37,9 @@ newList.addEventListener("click", () => {
         inputPlaceholder: 'Ex: Compras do mês',
         showCancelButton: true,
         confirmButtonText: 'Criar',
+        confirmButtonColor: "#1f9225ff",
         cancelButtonText: 'Cancelar',
+        cancelButtonColor: "rgba(177, 44, 44, 1)",
         inputValidator: value => !value ? 'Você precisa digitar um nome!' : undefined
     }).then(result => {
         if (result.isConfirmed){
@@ -63,3 +66,33 @@ newList.addEventListener("click", () => {
         }
     });
 });
+
+//Função para excluir uma lista
+export function deleteList(listName) {
+    Swal.fire({
+    title: "Tem certeza?",
+    text: "Essa ação não poderá ser desfeita!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Sim, excluir!",
+    cancelButtonText: "Cancelar"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            delete lists[listName];
+            saveLists(lists);
+            renderLists();
+
+            newListLayout.classList.add("hidden");
+            defaultLayout.classList.remove("hidden");
+            toggleDeleteButtonVisibility(false);
+
+            Swal.fire(
+            "Excluída!",
+            `A lista "${listName}" foi excluída.`,
+            "success"
+            );
+        }
+    })
+}

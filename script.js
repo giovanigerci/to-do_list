@@ -1,13 +1,15 @@
 import { loadLists, saveLists } from "./storage.js";
+import { deleteList } from "./addList.js";
 
 // Elementos
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskInput = document.getElementById("taskInput");
 const taskList = document.getElementById("taskList");
 const addListBtn = document.getElementById("addListBtn");
+const deleteListBtn = document.getElementById("deleteListBtn")
 
 // Lista ativa
-let currentList = "";
+export let currentList = "";
 
 // Atualiza o localStorage com as tarefas da lista atual
 function updateStorage() {
@@ -29,18 +31,14 @@ export function showList(listName) {
         const li = document.createElement("li");
         const span = document.createElement("span");
         span.textContent = taskText;
-        span.onclick = () => li.classList.toggle("completed");
+
+        li.appendChild(span);
 
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "X";
         removeBtn.classList.add("remove-btn");
-        removeBtn.onclick = () => {
-            li.remove();
-            updateStorage();
-        };
-
-        li.appendChild(span);
         li.appendChild(removeBtn);
+
         taskList.appendChild(li);
     });
 }
@@ -67,47 +65,75 @@ export function addTask() {
     const li = document.createElement("li");
     const span = document.createElement("span");
     span.textContent = taskText;
-    span.onclick = () => li.classList.toggle("completed");
+
+    li.appendChild(span);
 
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "X";
     removeBtn.classList.add("remove-btn");
-    removeBtn.onclick = () => {
-        li.remove();
-        updateStorage();
-    };
-
-    li.appendChild(span);
     li.appendChild(removeBtn);
+
     taskList.appendChild(li);
 
     taskInput.value = "";
     updateStorage();
-
-    Swal.fire({
-        icon: "success",
-        title: "Boa!",
-        text: "Tarefa adicionada com sucesso!"
-    });
 }
 
+// Delegação de eventos para concluir tarefa ou remover
+taskList.addEventListener("click", (e) => {
+    const li = e.target.closest("li");
+    if (!li) return;
+
+    if (e.target.classList.contains("remove-btn")) {
+        Swal.fire({
+            title: "Você tem certeza?",
+            text: "Essa tarefa será removida.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#1f9225ff",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sim, remover",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                li.remove();
+                updateStorage();
+                Swal.fire("Removida!", "A tarefa foi excluída com sucesso.", "success");
+            }
+        });
+    } else if (e.target.tagName === "SPAN") {
+        li.classList.toggle("completed");
+        updateStorage();
+    }
+});
+
 function finishList() {
-    // Esconder a área de tarefas e mostrar a área padrão
     const newListLayout = document.getElementById("newListLayout");
     const defaultLayout = document.getElementById("defaultLayout");
     newListLayout.classList.add("hidden");
     defaultLayout.classList.remove("hidden");
 
-    // Limpar o input de tarefas e a lista de tarefas visível
     taskInput.value = "";
     taskList.innerHTML = "";
 
-    // Opcionalmente, pode-se mostrar um alerta de sucesso
     Swal.fire({
         icon: "success",
         title: "Lista Salva!",
         text: "Sua lista foi salva com sucesso!"
     });
+}
+
+deleteListBtn.addEventListener("click", () => {
+  deleteList(currentList);
+});
+
+export function toggleDeleteButtonVisibility(isVisible) {
+  const deleteListBtn = document.getElementById("deleteListBtn");
+  if (isVisible) {
+    deleteListBtn.classList.remove("hidden");
+  } else {
+    deleteListBtn.classList.add("hidden");
+  }
 }
 
 // Eventos
